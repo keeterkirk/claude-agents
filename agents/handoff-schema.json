@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Handoff Plan",
+  "description": "Schema for the orchestrator's routing plan",
+  "type": "object",
+  "required": ["task_summary", "steps"],
+  "properties": {
+    "task_summary": {
+      "type": "string",
+      "description": "Brief description of the overall task"
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["order", "agent", "task", "depends_on"],
+        "properties": {
+          "order": {
+            "type": "integer",
+            "description": "Execution order (1-based)"
+          },
+          "agent": {
+            "type": "string",
+            "description": "Agent file name without .md extension"
+          },
+          "task": {
+            "type": "string",
+            "description": "Specific task for this agent"
+          },
+          "depends_on": {
+            "type": "array",
+            "items": { "type": "integer" },
+            "description": "Step numbers this step depends on (empty array if none)"
+          },
+          "context_from": {
+            "type": "array",
+            "items": { "type": "integer" },
+            "description": "Step numbers whose output should be passed as context"
+          }
+        }
+      }
+    }
+  }
+}
