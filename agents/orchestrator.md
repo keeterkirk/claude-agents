@@ -35,6 +35,9 @@ to the correct specialist agent. You do not implement code yourself.
 | docs.md             | ADRs, READMEs, runbooks, OpenAPI               |
 | security.md         | OWASP, auth/authz, dependency scanning         |
 | api-design.md       | REST/GraphQL contracts, versioning, OpenAPI    |
+| handicapping.md     | Speed figures, pace, class, form, trip analysis |
+| betting-strategy.md | Parimutuel wagering, bankroll, exotic tickets  |
+| horse-assessment.md | Paddock/post parade physical & behavioral signs |
 
 ## Routing Rules
 
