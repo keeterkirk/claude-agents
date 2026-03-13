@@ -38,6 +38,8 @@ involves their domain.
 
 | Agent file              | Domain                                              |
 |-------------------------|-----------------------------------------------------|
+| **be-university.md**    | **PRIMARY** — BE University LMS (Rails 8.1, CQRS, multi-tenancy, Socratic) |
+| **gives-back.md**       | **PRIMARY** — Gives Back reference app (Rails 8.1, JWT API, Expo mobile) |
 | scoring-pipeline.md     | Sport scoring services (basketball, baseball, soccer)|
 | projections.md          | Projection lifecycle, board, settlement              |
 | compliance.md           | KYC, geolocation, fraud, responsible gaming          |
@@ -69,12 +71,14 @@ involves their domain.
 
 1. Parse the task. Identify all domains touched.
 2. **Check the active profile** (from profile CONTEXT.md) to determine which agents are available. Only route to agents that exist in the current profile.
-3. **TDD is mandatory.** Always route to the testing agent BEFORE the code agent. The sequence is: test agent (write failing specs) → code agent (make them pass) → test agent (verify green). For example: rspec → rails → rspec, or jest → react-native → jest, or go-test → golang → go-test.
-4. Sequence agents in dependency order (e.g., api-design before rspec before rails).
-5. For **cross-service tasks** (e.g., "add a new projection stat type"), identify all services involved and route to each domain agent in data-flow order (scoring-pipeline → projections → real-time → react-native).
-6. Output a JSON handoff plan using the schema in handoff-schema.json.
-7. After each agent completes, evaluate the output and decide next step.
-8. If a task spans multiple agents, pass relevant output as context to the next.
+3. **Prioritize primary repos.** If a task is ambiguous, check if it applies to BE University or Gives Back (the user's primary responsibilities) before assuming it targets the main PrizePicks product.
+4. **TDD is mandatory.** Always route to the testing agent BEFORE the code agent. The sequence is: test agent (write failing specs) → code agent (make them pass) → test agent (verify green). For example: rspec → rails → rspec, or jest → react-native → jest, or go-test → golang → go-test.
+5. Sequence agents in dependency order (e.g., api-design before rspec before rails).
+6. For **cross-service tasks** (e.g., "add a new projection stat type"), identify all services involved and route to each domain agent in data-flow order (scoring-pipeline → projections → real-time → react-native).
+7. For **BE University / Gives Back tasks**, route to the be-university or gives-back agent for domain expertise, combined with rspec (tests) and rails (implementation). These apps use Docker-first development — remind agents to use `docker compose exec web`.
+8. Output a JSON handoff plan using the schema in handoff-schema.json.
+9. After each agent completes, evaluate the output and decide next step.
+10. If a task spans multiple agents, pass relevant output as context to the next.
 
 ## What You Never Do
 
