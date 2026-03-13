@@ -41,16 +41,17 @@ If a profile agent and a shared agent have the same name, the profile agent wins
 
 ## Setting Up: Work Machine
 
-Your work machine targets the PrizePicks platform (Rails monolith + Go read API + React Native + scoring microservices).
+Your work machine targets the PrizePicks platform. Primary focus is on BE University (engineering LMS) and Gives Back (campus recruitment app), with access to the full platform agents.
 
 ```bash
 echo "work" > .machine-profile
 ```
 
-This gives you 26 agents:
+This gives you 28 agents:
 
 | Category | Agents |
 |----------|--------|
+| **Primary Projects** | be-university, gives-back |
 | **Languages** | ruby, rails, golang, python, javascript, react-native |
 | **Testing** | rspec, jest, go-test, pytest, integration |
 | **Infrastructure** | postgres, docker, cicd, crossplane |

@@ -87,6 +87,31 @@ processing, and regulatory compliance across multiple US jurisdictions.
   - Kubernetes cluster management as code
   - Manages Kafka, Pulsar, Redis, PostgreSQL infra
 
+- **BE University** (`prizepicks-be-university`): Rails 8.1.2 / Ruby 3.4.3
+  - Standalone LMS for PrizePicks engineering education (NOT part of main product)
+  - PostgreSQL 17 (29 tables, UUID PKs) + MongoDB 7 (3 logical DBs) + Redis 7 + NATS JetStream
+  - ServiceActor (119 actors, 22+ organizers), CQRS MongoDB read model (9 doc types)
+  - SaaS multi-tenancy (acts_as_tenant on 34 tables), two portals (tenant :3010, admin :3009)
+  - Socratic learning, flash cards/SM-2, voice commands, sign language, visual templates
+  - Hotwire (Stimulus 3.x + Turbo 8), Bootstrap 5, WASM (Transformers.js)
+  - Ollama + Anthropic API + Google Gemini for AI features
+  - 10 languages, 5,300+ specs, 10,741 learnings across 12 domains
+  - Docker-first development (mandatory), ≤15 lines/method code quality rules
+
+- **Gives Back** (`prizepicks-gives-back`): Rails 8.1.2 / Ruby 3.4.3
+  - Campus recruitment reference app — generalized fork of BE University
+  - PostgreSQL 17 + MongoDB 7 + Redis 7 + NATS JetStream (ports 54320-54326)
+  - ServiceActor pattern, NATS event-driven architecture (EventLog audit trail)
+  - Dual interface: Hotwire web + JWT API for React Native mobile (Expo 55)
+  - 9 languages with RTL support, Ollama LLM integration, sign language (MediaPipe)
+  - Kamal for deployment, Pundit authorization (user/mentor/admin roles)
+
+## Primary Focus
+
+Kirk's current primary responsibilities are **BE University** and **Gives Back**.
+When a task doesn't specify which repo, consider whether it applies to these
+projects first before assuming it targets the main PrizePicks product.
+
 ## Conventions
 
 - **Service layer**: ServiceActor pattern (`service_actor` gem) — inputs/outputs declared, `fail!` for errors
@@ -121,9 +146,11 @@ processing, and regulatory compliance across multiple US jurisdictions.
 | `goooal-soccer` | Live soccer scoring (Go) |
 | `analytics-lightning_markets` | Odds analytics & pricing (Python) |
 | `crossplane-multiverse` | Infrastructure as code (Crossplane/K8s) |
+| `prizepicks-be-university` | **PRIMARY** — Engineering LMS (Rails 8.1, standalone) |
+| `prizepicks-gives-back` | **PRIMARY** — Campus recruitment reference app (Rails 8.1) |
 
 ## Domain Agents Available
 
 In addition to the shared agents, this profile provides:
-scoring-pipeline, projections, compliance, promotions, pulsar,
-crossplane, real-time, payments-prizepicks
+be-university, gives-back, scoring-pipeline, projections, compliance,
+promotions, pulsar, crossplane, real-time, payments-prizepicks
