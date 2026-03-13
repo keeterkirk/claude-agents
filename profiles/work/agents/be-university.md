@@ -125,6 +125,41 @@ end
 - i18n and content translation pipelines
 - MongoDB schema design (voice logs, sessions, read model)
 - Docker-based development workflow
+- **Onboarding curriculum** — cross-functional content for 7 roles (PM, BE, FE, DATA, QA, PLATFORM, EM)
+- **Quark/Backstage content pipeline** — dual-purpose content (LMS + reference docs) publishing to Backstage
+
+## Onboarding Curriculum (Active Initiative — PLA-3847)
+
+BE University serves as the **content authoring engine** for the entire engineering
+org's knowledge. Content is authored once as learning nuggets, assembled into
+role-specific pathways, and published in two modes:
+
+- **Interactive learning** (BE University) — assessment, spaced repetition, Socratic reveal
+- **Reference documentation** (Quark / Backstage) — searchable, always-available lookup
+
+### Content Tiers
+- **Tier 1 — Universal**: All 7 roles (company/domain, platform arch, workflows, security)
+- **Tier 2 — All Engineers**: BE+FE+DATA+QA+PLATFORM (dev env, architecture, observability, testing, deployment)
+- **Tier 3 — Cross-Discipline**: Shared by 2-3 roles (API contracts, data layer, real-time, infra)
+- **Tier 4 — Role-Specific**: Deep tracks per role (Rails/Go deep, RN/Expo deep, analytics deep, etc.)
+
+### Key Files
+- `docs/claude/ONBOARDING_CURRICULUM.md` — master curriculum map (roles, tiers, overlap matrix, Quark integration)
+- `db/migrate/20260313100000_seed_onboarding_tier1_universal.rb` — Tier 1 content (27 leaves)
+- `db/migrate/20260313100001_seed_onboarding_tier2_all_engineers.rb` — Tier 2 content (25 leaves)
+
+### Taxonomy Pattern for Onboarding Content
+Uses the same `TAXONOMY_MAP` + `create_leaf` helper pattern as `SeedAiLearningDomains`:
+- `create_node` → structural nodes (root, area)
+- `create_area` → area groupings within a domain
+- `create_leaf` → leaf learning with taxonomy type, bloom level, difficulty, mode, estimated time
+- `lookup_type_id(label)` → resolves tenant-scoped Lookup UUIDs by label
+
+### Platform Context Matters
+Although BE University is standalone operationally, it's **contextually coupled** to
+the main PrizePicks platform. The curriculum teaches engineers how PrizePicks works —
+so the agent needs platform architecture knowledge to validate that learning content
+is accurate (e.g., "the Go API uses sqlc" not "the Go API uses GORM").
 
 ## What You Do NOT Handle
 
@@ -156,7 +191,7 @@ COVERAGE=true docker compose exec web bundle exec rspec
 | File | Purpose |
 |------|---------|
 | `CLAUDE.md` | **MANDATORY READ** — 212-line agent guide |
-| `docs/claude/*.md` | 13 architecture docs (CQRS, Socratic, Tenancy, i18n) |
+| `docs/claude/*.md` | 14 architecture docs (CQRS, Socratic, Tenancy, i18n, Onboarding) |
 | `spec/README.md` | 345-line testing guide with factory patterns |
 | `config/routes/tenant.rb` | 13,500 LOC tenant portal routes |
 | `app/services/actors/` | 119 service actor sub-actors |
