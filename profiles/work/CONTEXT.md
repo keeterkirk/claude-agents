@@ -112,6 +112,13 @@ Kirk's current primary responsibilities are **BE University** and **Gives Back**
 When a task doesn't specify which repo, consider whether it applies to these
 projects first before assuming it targets the main PrizePicks product.
 
+### Active Initiatives
+- **Onboarding Curriculum (PLA-3847)**: Cross-functional onboarding for all engineering/product roles.
+  BE University is the content authoring engine; content publishes to Quark (Backstage) as reference docs.
+- **Quark (Backstage)**: The "Quark" environment is PrizePicks' developer portal powered by Backstage.
+  Documentation is migrating from Notion → Quark. BE University content serves dual-purpose:
+  interactive learning (LMS) + reference documentation (Backstage TechDocs).
+
 ## Conventions
 
 - **Service layer**: ServiceActor pattern (`service_actor` gem) — inputs/outputs declared, `fail!` for errors
