@@ -24,14 +24,21 @@ echo "home" > .machine-profile   # home machine
 
 ## How It Works
 
-The `run-agent.sh` script detects which environment you're on and assembles a system prompt from three layers:
+The `run-agent.sh` script detects which environment you're on and assembles a system prompt from up to five layers:
 
 ```
 Shared CONTEXT.md          (TDD rules, universal conventions)
   + Profile CONTEXT.md     (stack-specific: PrizePicks or horse racing)
+  + Repo AGENTS.md         (application-specific — auto-detected from cwd)
+  + CONTEXT.local.md       (machine-specific overrides, gitignored)
   + Agent .md              (specialist system prompt)
   = System prompt passed to Claude CLI
 ```
+
+The repo-level `AGENTS.md` is auto-detected by walking up from the current directory
+to find a git root with an `AGENTS.md` file. This lets each project define its own
+context (databases, models, conventions, Docker commands) that all agents receive
+when operating in that repo.
 
 Agents live in two places:
 - `agents/` — shared agents available in all profiles (ruby, rails, go, rspec, etc.)
@@ -137,6 +144,21 @@ CLAUDE_AGENTS_PROFILE=home ./scripts/run-agent.sh ml-pipeline
 # List available agents for current profile
 ./scripts/run-agent.sh
 ```
+
+## Repo-Level Context (AGENTS.md)
+
+Any git repo can include an `AGENTS.md` at its root. When you run an agent from
+inside that repo, the script auto-detects and layers it into the system prompt.
+
+```bash
+# From inside prizepicks-be-university/
+../claude-agents/scripts/run-agent.sh mongodb
+# → Loads: CONTEXT.md + work profile + AGENTS.md + mongodb.md
+```
+
+This is how repos like `prizepicks-be-university` and `app-ops` provide
+application-specific context (databases, models, Docker commands, pitfalls)
+to every agent without modifying the agents themselves.
 
 ## Adding a New Profile
 

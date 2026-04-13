@@ -117,12 +117,32 @@ if [[ -z "$AGENT_FILE" ]]; then
   exit 1
 fi
 
+# ─── Repo-Level Context Detection ─────────────────────────────────────
+# Walk up from cwd looking for AGENTS.md in the repo root.
+# This provides application-specific context for the current project.
+
+detect_repo_context() {
+  local dir
+  dir="$(pwd)"
+  while [[ "$dir" != "/" ]]; do
+    if [[ -f "$dir/AGENTS.md" && -d "$dir/.git" ]]; then
+      echo "$dir/AGENTS.md"
+      return
+    fi
+    dir="$(dirname "$dir")"
+  done
+  echo ""
+}
+
+REPO_CONTEXT="$(detect_repo_context)"
+
 # ─── Build System Prompt ──────────────────────────────────────────────
 # Layers (in order):
 #   1. Shared CONTEXT.md         — universal conventions
 #   2. Profile CONTEXT.md        — environment-specific stack details
-#   3. CONTEXT.local.md          — machine-specific overrides (gitignored)
-#   4. Agent .md                 — the specialist's system prompt
+#   3. Repo AGENTS.md            — application-specific context (auto-detected)
+#   4. CONTEXT.local.md          — machine-specific overrides (gitignored)
+#   5. Agent .md                 — the specialist's system prompt
 
 SYSTEM_PROMPT="$(cat "$CONTEXT_FILE")"
 
@@ -133,6 +153,15 @@ if [[ -n "$PROFILE" && -f "$PROFILES_DIR/$PROFILE/CONTEXT.md" ]]; then
 ---
 
 $(cat "$PROFILES_DIR/$PROFILE/CONTEXT.md")"
+fi
+
+# Layer in repo-level context
+if [[ -n "$REPO_CONTEXT" ]]; then
+  SYSTEM_PROMPT="$SYSTEM_PROMPT
+
+---
+
+$(cat "$REPO_CONTEXT")"
 fi
 
 # Layer in local overrides
@@ -155,7 +184,11 @@ $(cat "$AGENT_FILE")"
 INITIAL_PROMPT="${2:-}"
 
 if [[ -n "$PROFILE" ]]; then
-  echo "▸ Profile: $PROFILE  |  Agent: $AGENT_NAME  |  $(basename "$AGENT_FILE")"
+  local_info="▸ Profile: $PROFILE  |  Agent: $AGENT_NAME  |  $(basename "$AGENT_FILE")"
+  if [[ -n "$REPO_CONTEXT" ]]; then
+    local_info="$local_info  |  Repo: $(dirname "$REPO_CONTEXT" | xargs basename)"
+  fi
+  echo "$local_info"
 fi
 
 if [[ -n "$INITIAL_PROMPT" ]]; then
