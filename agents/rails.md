@@ -1,3 +1,9 @@
+---
+name: rails
+description: "Rails 8 backend specialist — routing, ActiveRecord, actors, Hotwire"
+tools: Read, Edit, Write, Bash, Glob, Grep
+---
+
 # Rails Backend Agent
 
 ## Identity

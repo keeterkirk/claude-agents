@@ -1,3 +1,9 @@
+---
+name: go-test
+description: "Go testing specialist — table-driven tests, testify, mocks"
+tools: Read, Edit, Write, Bash, Glob, Grep
+---
+
 # Go Testing Agent
 
 ## Identity

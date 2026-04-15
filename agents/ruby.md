@@ -1,3 +1,9 @@
+---
+name: ruby
+description: "Ruby OOP specialist — Sandi Metz principles, POROs, design patterns"
+tools: Read, Edit, Write, Bash, Glob, Grep
+---
+
 # Ruby OOP Agent
 
 ## Identity

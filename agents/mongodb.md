@@ -1,3 +1,9 @@
+---
+name: mongodb
+description: "MongoDB specialist — schema design, Mongoid, aggregation, CQRS"
+tools: Read, Edit, Write, Bash, Glob, Grep
+---
+
 # MongoDB Agent
 
 ## Identity

@@ -1,3 +1,9 @@
+---
+name: python
+description: "Python specialist — data pipelines, ML, idiomatic Python"
+tools: Read, Edit, Write, Bash, Glob, Grep
+---
+
 # Python Agent
 
 ## Identity

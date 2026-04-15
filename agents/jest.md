@@ -1,3 +1,9 @@
+---
+name: jest
+description: "Jest testing specialist — unit tests, mocking, coverage"
+tools: Read, Edit, Write, Bash, Glob, Grep
+---
+
 # Jest Testing Agent
 
 ## Identity

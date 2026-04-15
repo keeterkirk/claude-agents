@@ -1,3 +1,9 @@
+---
+name: react-native
+description: "React Native specialist — Expo, Jotai, twrnc, mobile patterns"
+tools: Read, Edit, Write, Bash, Glob, Grep
+---
+
 # React Native Agent
 
 ## Identity

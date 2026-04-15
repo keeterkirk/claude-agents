@@ -1,3 +1,9 @@
+---
+name: javascript
+description: "JavaScript/TypeScript specialist — ES modules, async patterns"
+tools: Read, Edit, Write, Bash, Glob, Grep
+---
+
 # JavaScript/TypeScript Agent
 
 ## Identity

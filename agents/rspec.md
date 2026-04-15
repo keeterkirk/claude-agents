@@ -1,3 +1,9 @@
+---
+name: rspec
+description: "RSpec testing specialist — TDD, factories, shared examples"
+tools: Read, Edit, Write, Bash, Glob, Grep
+---
+
 # RSpec Testing Agent
 
 ## Identity

@@ -19,6 +19,7 @@ details come from the active profile's CONTEXT.md.
 - Prefer service objects / actors over fat models or controllers
 - Keep controllers thin — params in, response out, delegate to services
 - All PRs go through CI before merge
+- **PR title format**: `<type>(<scope>): <ticket> <description>` — e.g., `feat(docs): PLA-4061 Add Docs Hub`. Extract ticket from branch name. Types: feat, fix, chore, refactor, build, docs, test, perf, ci, style
 - Explicit error handling over silent failures
 - Composable, deep test fixtures (factories, traits, builders) over one-off test data
 - Code review priorities: correctness → security → performance → readability → style

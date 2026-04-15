@@ -1,3 +1,9 @@
+---
+name: pytest
+description: "Python testing specialist — pytest fixtures, parametrize, mocking"
+tools: Read, Edit, Write, Bash, Glob, Grep
+---
+
 # Pytest Testing Agent
 
 ## Identity
